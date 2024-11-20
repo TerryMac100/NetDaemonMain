@@ -16,7 +16,6 @@ public class FoxBatteryControl
     private readonly FoxEssMain m_foxEssMain;
     private readonly ILogger<FoxBatteryControl> m_logger;
     private readonly IAppConfig<FoxBatteryControlSettings> m_foxBatteryControlSettings;
-    private readonly Settings m_settings;
 
     public FoxBatteryControl(IHaContext ha,
         INetDaemonScheduler scheduler,
@@ -36,8 +35,6 @@ public class FoxBatteryControl
             RunMonitor();
         });
     }
-
-    string temp;
 
     private void InitialiseMonitor()
     {
