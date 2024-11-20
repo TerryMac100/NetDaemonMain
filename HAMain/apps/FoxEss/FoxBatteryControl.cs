@@ -7,7 +7,7 @@ using NetDaemon.HassModel.Entities;
 namespace FoxEss;
 
 /// <summary>
-/// 
+/// FoxESS Battery control state machine
 /// </summary>
 [NetDaemonApp]
 public class FoxBatteryControl

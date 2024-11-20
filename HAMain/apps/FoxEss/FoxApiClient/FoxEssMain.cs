@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace NetDaemonMain.apps.FoxEss.FoxApiClient
 {
+    /// <summary>
+    /// FoxESS API client functionality
+    /// </summary>
     public class FoxEssMain
     {
         private readonly IHaContext m_ha;
