@@ -34,7 +34,7 @@ public class GetTimeSegment
 
     public string WorkMode { get; set; } = "SelfUse";
 
-    public int MinSocOnGrid { get; set; } = 10;
-    public int FdSoc { get; set; } = 10;
+    public int MinSocOnGrid { get; set; } = 20;
+    public int FdSoc { get; set; } = 20;
     public int FdPwr { get; set; } = 0;
 }

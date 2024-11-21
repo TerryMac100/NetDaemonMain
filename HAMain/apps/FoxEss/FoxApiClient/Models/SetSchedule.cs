@@ -46,9 +46,6 @@ public class SetTimeSegment : GetTimeSegment
             EndMinute = 29;
         else
             EndMinute = 59;
-        
-        FdSoc = 0;
-        FdPwr = 0;
     }
 
     public SetTimeSegment(Group group)
