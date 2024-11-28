@@ -1,18 +1,20 @@
 using Microsoft.Extensions.Hosting;
-using NetDaemon.Extensions.Logging;
 using NetDaemon.Extensions.Scheduler;
 using NetDaemon.Extensions.Tts;
 using NetDaemon.Runtime;
 using System.Reflection;
 using NetDaemonMain.apps.FoxEss.FoxApiClient;
+using NetDaemonMain.Logging;
 
 #pragma warning disable CA1812
 
 try
 {
+    Environment.CurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
     await Host.CreateDefaultBuilder(args)
         .UseNetDaemonAppSettings()
-        .UseNetDaemonDefaultLogging()
+        .UseCustomLogging()
         .UseNetDaemonRuntime()
         .UseNetDaemonTextToSpeech()
         .ConfigureServices((_, services) =>
@@ -20,7 +22,6 @@ try
                 .AddAppsFromAssembly(Assembly.GetExecutingAssembly())
                 .AddNetDaemonStateManager()
                 .AddNetDaemonScheduler()
-                //.AddHomeAssistantGenerated()               
         )
         .AddFoxApiClientBuilder()
         .Build()
