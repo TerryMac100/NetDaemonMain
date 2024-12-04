@@ -11,31 +11,11 @@ All entities and events on the Home Assistant instance are available just as the
 3)	.NET 8 SDK
 4)	The Octopus Energy HACS integration or similar integration for other suppliers
 ## Setup
-Setup is saved in the FoxBatteryControlSettings.yaml file as below:
-FoxEss.FoxBatteryControlSettings:
-  ApiKey: ###########-YOUR-API-KEY-##########  
-  DeviceSN: #YOUR-DEVICE-SERIAL-NUMBER#
-  DisablePrice: 0.075
-  ChargePrice: 0.075
-  CurrentRateEntityID: sensor.octopus_energy_electricity_YOUR_ACC_&_METER_NUMBER_current_rate
-  OffPeakFlagEntityID: binary_sensor.octopus_energy_electricity_YOUR_ACC_&_METER_NUMBER_off_peak
-  DefaultSchedule:
-      Groups:
-      - WorkMode: ForceCharge
-        Enabled: 1
-        MinSocOnGrid: 20
-        FdSoc: 20
-        FdPwr: 0
-        StartHour: 0
-        StartMinute: 0
-        EndHour: 5
-        EndMinute: 29
-      - WorkMode: Backup
-        Enabled: 1
-        MinSocOnGrid: 20
-        FdSoc: 20
-        FdPwr: 0
-        StartHour: 23
-        StartMinute: 30
-        EndHour: 23
-        EndMinute: 59
+Setup is saved in the FoxBatteryControlSettings.yaml file, an example is provided in the solution 
+
+You will required the following items
+1) The FoxESS API-KEY
+2) Your device serial number
+3) The ID of the sensor that provides the current electricity rate, this will be different for each user as it contains the meter number
+4) The ID of the binary sensor that indicates that supply is at the off peak rate, again this is different for each user
+5) A default schedule an example is supplied in the solution.
