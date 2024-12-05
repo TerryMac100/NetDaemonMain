@@ -19,3 +19,7 @@ You will required the following items
 3) The ID of the sensor that provides the current electricity rate, this will be different for each user as it contains the meter number
 4) The ID of the binary sensor that indicates that supply is at the off peak rate, again this is different for each user
 5) A default schedule an example is supplied in the solution.
+
+## NetDaemon Installation and Deployment
+Instruction for installation and deployment of NetDaemon on Home Assistant or a Docker container can be found at the link below:
+https://netdaemon.xyz/docs/user/started/installation/
