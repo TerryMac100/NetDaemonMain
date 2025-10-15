@@ -106,13 +106,21 @@ namespace NetDaemonMain.apps.FoxEss.FoxApiClient
 
         public async void SetSchedule(SetSchedule setSchedule)
         {
+            // Disable the calls in debug builds (but keep the code in place for testing)
+            bool m_debugBuild = false;
+#if DEBUG
+            m_debugBuild = true;
+#endif
             var st = JsonConvert.SerializeObject(setSchedule);
             var info = $"Sending Schedule\n{st}";
             m_logger.LogInformation(info);
 
-            if (m_callsEnabled == "off")
+            if (m_callsEnabled == "off" || m_debugBuild) 
             {
-                m_logger.LogInformation($"API Call disabled");
+                if (m_debugBuild)
+                    m_logger.LogInformation($"API Call disabled in debug build");
+                else
+                    m_logger.LogInformation($"API Call disabled");          
                 return;
             }
 

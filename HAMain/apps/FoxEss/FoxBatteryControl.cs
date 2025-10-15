@@ -64,7 +64,7 @@ public class FoxBatteryControl
         {
             var time = DateTime.Now.TimeOfDay;
 
-            if (time >= new TimeSpan(23, 30, 0) && time < new TimeSpan(5, 30, 0))
+            if (time >= new TimeSpan(23, 30, 0) || time < new TimeSpan(5, 30, 0))
                 return true;
 
             return false;
@@ -116,25 +116,25 @@ public class FoxBatteryControl
                 SendSchedule(m_foxEssMain.GetDefaultSchedule());
 
                 if (m_overNight)
-                    MonitorState = MonitorSchedule.CheapRate;
+                    MonitorState = MonitorSchedule.OverNight;
                 else
-                    MonitorState = MonitorSchedule.PeakRate;
+                    MonitorState = MonitorSchedule.PeakDayRate;
                 break;
 
-            case MonitorSchedule.CheapRate:
+            case MonitorSchedule.OverNight:
                 if (m_overNight == false)
                 {
                     m_logger.LogInformation($"FoxESS - Off peak end");
-                    MonitorState = MonitorSchedule.PeakRate;
+                    MonitorState = MonitorSchedule.PeakDayRate;
                 }
                 break;
 
-            case MonitorSchedule.PeakRate:
+            case MonitorSchedule.PeakDayRate:
                 if (m_overNight)
                 {
                     m_logger.LogInformation($"FoxESS - Off peak started, Setting up Default Schedule");
                     SendSchedule(m_foxEssMain.GetDefaultSchedule());
-                    MonitorState = MonitorSchedule.CheapRate;
+                    MonitorState = MonitorSchedule.OverNight;
                 }
                 else
                 {
@@ -161,7 +161,7 @@ public class FoxBatteryControl
                 {
                     m_logger.LogInformation($"FoxESS - Off peak started, Setting up Default Schedule");
                     SendSchedule(m_foxEssMain.GetDefaultSchedule());
-                    MonitorState = MonitorSchedule.CheapRate;
+                    MonitorState = MonitorSchedule.OverNight;
                 }
                 else
                 {
@@ -169,7 +169,7 @@ public class FoxBatteryControl
                     {
                         m_logger.LogInformation($"FoxESS - Current price greater than backup price");
                         SendSchedule(m_foxEssMain.GetDefaultSchedule());
-                        MonitorState = MonitorSchedule.PeakRate;
+                        MonitorState = MonitorSchedule.PeakDayRate;
                     }
                     else
                     {
@@ -187,7 +187,7 @@ public class FoxBatteryControl
                 {
                     m_logger.LogInformation($"FoxESS - Off peak started, Setting up Default Schedule");
                     SendSchedule(m_foxEssMain.GetDefaultSchedule());
-                    MonitorState = MonitorSchedule.CheapRate;
+                    MonitorState = MonitorSchedule.OverNight;
                 }
                 else
                 {
@@ -196,7 +196,7 @@ public class FoxBatteryControl
                         m_logger.LogInformation($"FoxESS - Current price greater than charge price");
                         SendSchedule(m_foxEssMain.GetDefaultSchedule());
 
-                        MonitorState = MonitorSchedule.PeakRate;
+                        MonitorState = MonitorSchedule.PeakDayRate;
                     }
                     else
                     {
@@ -228,11 +228,11 @@ public class FoxBatteryControl
                     m_logger.LogInformation($"FoxESS - Monitor Reset");
                     break;
 
-                case MonitorSchedule.CheapRate:
+                case MonitorSchedule.OverNight:
                     m_logger.LogInformation($"FoxESS - Cheap Rate");
                     break;
 
-                case MonitorSchedule.PeakRate:
+                case MonitorSchedule.PeakDayRate:
                     m_logger.LogInformation($"FoxESS - Peak Rate");
                     break;
 
@@ -251,8 +251,8 @@ public class FoxBatteryControl
     private enum MonitorSchedule
     {
         Reset,
-        PeakRate,
-        CheapRate,
+        PeakDayRate,
+        OverNight,
         BackupPeriod,
         ChargePeriod
     }
