@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /HAMain/apps/FoxEss/FoxBatteryControlSettings.yaml
+/HAMain/apps/FoxEss/FoxBatteryControlSettings-sample.yaml
